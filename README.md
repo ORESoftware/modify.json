@@ -1,47 +1,34 @@
 
 
-# Your Project Readme Goes Here
+## @oresoftware/modify.json
 
-This project is used by:
-https://github.com/oresoftware/ts-project
-You can use ts-project to do things more automatically.
+This is a command line tool to modify subproperties on disk or write to stdout.
 
-To do things more manually, continue on.
+## install: `npm install -g @oresoftware/modify.json`
 
-Steps to making this project skeleton your own project base.
+### Usage
 
-1. Clone this repo: <br>
-    `git clone https://github.com/your-org/modify.json.git YOUR-PROJECT-NAME`
-2. Update package.json so that `name` property matches `YOUR-PROJECT-NAME`.
-3. Update other package.json fields so that they are accurate.
+modify.json <file> 'the.nested.prop.you.want.to.modify' <value>
 
-To check to see if `YOUR-PROJECT-NAME` is available on NPM, uses this command at the command line:
+By default this writes the JSON.stringify result to stdout. To modify the file on disk, use:
 
-`$ npm view YOUR-PROJECT-NAME`  # will give you a 404 if the name is available.
+`--disk`
 
 
-### This project skeleton uses:
+#### To change the value to a boolean, use:
 
-* the correct semver initial value (npm init defaults to 1.0.0 which is just wrong).
-* typescript 2.x
-* nodejs version 9
-* travis (for automated testing of your library)
-* MIT license
-* good simple default settings for .gitignore / .npmignore / .editorconfig / .gitattributes
-* Transpiling from src to dist folders (by default, you can change it manually)
+modify.json <file> <prop> true
+modify.json <file> <prop> 'true'
+modify.json <file> <prop> false
+modify.json <file> <prop> "false"
 
 
-To transpile files in place, instead of tranpiling from `'src'` to `'dist'`:
+#### To change the value to an empty string, use:
 
-<br>
-update tsconfig.json  (remove the `outDir` line):
+modify.json <file> <prop> '""'
 
-```json
-"compilerOptions": {
-    "outDir": "dist"    
-}
-```
 
-For small projects with just one .ts/.js file, you can just get rid of the src/lib folder, and put your index.ts
-file in the root of the project. In that case, make sure to change the `main` property in package.json from 'lib/index.js' to
-'index.js'. Same with the `typings/types` properties. 
+### To change to the string "true"
+
+modify.json <file> <prop> '"true"'
+

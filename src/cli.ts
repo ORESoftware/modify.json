@@ -10,6 +10,8 @@ let keyv = process.argv[3] || '';
 let theVal = process.argv[4];
 let val = JSON.parse(theVal || null);
 
+let isDisk = process.argv[5] === '--disk';
+
 if (!json_path) {
   throw new Error('must pass a path to package.json');
 }
@@ -45,9 +47,11 @@ for (let i = 0, l = keys.length; i < l; i++) {
   prev = result;
 }
 
-fs.writeFile(json_path, JSON.stringify(json), function (err) {
-  if (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-});
+if (isDisk) {
+  fs.writeFileSync(json_path, JSON.stringify(json));
+}
+else {
+  console.log(JSON.stringify(json));
+}
+
+
