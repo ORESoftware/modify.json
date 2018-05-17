@@ -8,12 +8,13 @@ import {getCleanTrace} from 'clean-trace';
 
 let val, json_path = opts.file;
 const theVal = opts.z;
+
 try {
   val = JSON.parse(theVal || null);
 }
 catch (err) {
   console.error(err.message);
-  console.error('Could not parse your argument for -z.')
+  console.error('Could not parse your argument for -z.');
   process.exit(1);
 }
 
