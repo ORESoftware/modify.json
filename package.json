@@ -27,7 +27,10 @@
     "url": "https://github.com/your-org/modify.json/issues"
   },
   "homepage": "https://github.com/your-org/modify.json#readme",
-  "dependencies": {},
+  "dependencies": {
+    "clean-trace": "0.0.104",
+    "dashdash": "^1.14.1"
+  },
   "devDependencies": {
     "@types/core-js": "^0.9.46",
     "@types/node": "^9.6.2"

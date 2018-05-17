@@ -3,21 +3,29 @@
 
 import path = require('path');
 import fs = require('fs');
+import {opts} from './parse-cli-options';
+import {getCleanTrace} from 'clean-trace';
 
-let json_path = process.argv[2];
-let keyv = process.argv[3] || '';
+let val, json_path = opts.file;
+const theVal = opts.z;
+try {
+  val = JSON.parse(theVal || null);
+}
+catch (err) {
+  console.error(err.message);
+  console.error('Could not parse your argument for -z.')
+  process.exit(1);
+}
 
-let theVal = process.argv[4];
-let val = JSON.parse(theVal || null);
-
-let isDisk = process.argv[5] === '--disk';
+const isDisk = Boolean(opts.disk);
+const keyv = opts.x;
 
 if (!json_path) {
-  throw new Error('must pass a path to package.json');
+  throw getCleanTrace(new Error('must pass a path to json file.'));
 }
 
 if (!theVal) {
-  throw new Error('must pass a value to package.json');
+  throw getCleanTrace(new Error('must pass a value to modify the json key with.'));
 }
 
 if (!path.isAbsolute(json_path)) {
@@ -48,7 +56,7 @@ for (let i = 0, l = keys.length; i < l; i++) {
 }
 
 if (isDisk) {
-  fs.writeFileSync(json_path, JSON.stringify(json));
+  fs.writeFileSync(json_path, JSON.stringify(json, null, 2));
 }
 else {
   console.log(JSON.stringify(json));

@@ -4,7 +4,7 @@
 
 This is a command line tool to modify subproperties on disk or write to stdout.
 
-## install: `npm install -g @oresoftware/modify.json`
+#### install: `npm install -g @oresoftware/modify.json`
 
 ### Usage
 
